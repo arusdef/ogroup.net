@@ -1,49 +1,52 @@
-<header class="navigation" role="banner" data-search-index="false">
-  <div class="navigation-wrapper">
-<!--     <a href="javascript:void(0)" class="mobile-logo">
-      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png" alt="Logo image">
-    </a> -->
-    <!-- <a href="javascript:void(0)" id="js-navigation-mobile-menu" class="navigation-mobile-menu">MENU</a> -->
-    <nav role="navigation">
-    <a class="svg" href="/">
-      <span>
-        <object type="image/svg+xml" data="{{ site.header_logo }}" class="logo"></object>
+<div class="fixed-header-wrapper load">
+  <div class="lang">
 
-        <!-- <object type="image/svg+xml" data="/static/images/logo.svg" class="logo"></object> -->
-      </span>
-    </a>
+    {% if jekyll.environment == 'dev' %}
+      {% assign english = 'http://dev.merrittwoodwork.com' %}
+    {% else %}
+      {% assign english = site.url %}
+    {% endif %}
+
+    {% if jekyll.environment == 'dev' %}
+      {% assign german = 'http://dev.merrittwoodwork.com/de' %}
+    {% else %}
+      {% assign german = site.url | append: '/de' %}
+    {% endif %}
 
 
-    <!-- <button id="trigger-overlay" type="button">Open Overlay</button> -->
 
-      <ul id="js-navigation-menu" class="navigation-menu">
-        <li class="nav-link work"><a href="/work">CASE STUDIES</a></li>
-        <li class="nav-link agency"><a href="/agency">OUR FIRM</a></li>
-        <li class="nav-link clients"><a href="/index.html#clients">LEADERSHIP</a></li>
-        <li class="nav-link blog"><a href="/blog">INSIGHTS</a></li>
-        <li class="nav-link contact"><a href="/contact">CONTACT</a></li>
-      </ul>
+    {% if site.active_lang == 'de' %}
+      <a href="{{english}}" class="header-text">EN</a> | <span class="header-text active">DE</span>
+    {% else %}
+      <span class="header-text active">EN</span> | <a href="{{german}}" class="header-text">DE</a>
+    {% endif %}
 
-      <div id="menu-wrapper">
-        <p class="contact mobile"><a href="/contact">CONTACT</a></p>
-        <button class="c-hamburger c-hamburger--htx overlay-close">
-          <span>toggle menu</span>
-        </button>
-      </div>
-
-      <div class="overlay overlay-hugeinc">
-        <!-- <button type="button" class="c-hamburger">Close</button> -->
-        <nav>
-          <ul>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/agency">Agency</a></li>
-            <li><a href="/index.html#clients">Clients</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-
-    </nav>
   </div>
-</header>
+  <header class="grid-container">
+    <!-- <div class="grid-collapse"> -->
+      <div class="grid-column">
+        <div class="va-wrapper">
+          <a href="/"><img src="/uploads/logo.png" alt="MERRITT"></a>
+
+          <div id="trigger-overlay" class="menu header-text">
+          <p>menu</p>
+          <button class="c-hamburger c-hamburger--htx">
+            <span>toggle menu</span>
+          </button>
+          </div>
+          <div class="left header-text">
+            <a {% if page.class == 'portfolio' or page.class == 'casestudy' %}class="active"{% endif %} href="/portfolio">{{ site.portfolio-link[lang] | upcase }}</a>
+            <a {% if page.class == 'capabilities' %}class="active"{% endif %} href="/capabilities">{{ site.capabilities-link[lang] | upcase }}</a>
+            <a {% if page.class == 'about' %}class="active"{% endif %} href="/about">{{ site.about-link[lang] | upcase }}</a>
+          </div>
+          <div class="right header-text">
+            <a {% if page.class == 'clients' %}class="active"{% endif %} href="/clients">{{ site.clients-link[lang] | upcase }}</a>
+            <a {% if page.class == 'press' %}class="active"{% endif %} href="/press">{{ site.press-link[lang] | upcase }}</a>
+            <a {% if page.class == 'careers' %}class="active"{% endif %} href="/careers">{{ site.careers-link[lang] | upcase }}</a>
+            <a {% if page.class == 'contact' %}class="active"{% endif %} href="/contact">{{ site.contact-link[lang] | upcase }}</a>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+  </header>
+</div>
